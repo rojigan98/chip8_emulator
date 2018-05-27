@@ -208,19 +208,50 @@ int Disassemble8080Op(unsigned char *codebuffer, int pc){
     case 0xbf: printf("CMP    A"); break;
     case 0xc0: printf("RNZ"); break;
     case 0xc1: printf("POP    B"); break;
-    case 0xc2: printf("JNZ    adr"); break;
+    case 0xc2: printf("JNZ    adr"); opbytes = 3; break; //is this fine? or nah?
     case 0xc3: printf("JMP    $%02x%02x", code[2], code[1]); opbytes = 3; break;
-    case 0xc4: printf("CNZ    adr"); break;
+    case 0xc4: printf("CNZ    adr"); opybtes = 3; break;
     case 0xc5: printf("PUSH   B"); break;
     case 0xc6: printf("ADI    #$%02x", code[1]); opbytes = 2; break; //check this one again later
     case 0xc7: printf("RST    0"); break;
     case 0xc8: printf("RZ"); break;
     case 0xc9: printf("RET"); break;
-    case 0xca: printf("JZ     adr"); break;
+    case 0xca: printf("JZ     adr"); opbytes = 3; break;
     case 0xcb: printf("NOP"); break;
-    case 0xcc: printf("CZ     adr"); break;
-    case 0xcd: printf("CALL   adr"); break;
-    case 0xce: printf("")
+    case 0xcc: printf("CZ     adr"); opbytes = 3; break;
+    case 0xcd: printf("CALL   adr"); opbytes = 3; break;
+    case 0xce: printf("ACI    #$%02x", code[1]); opbytes = 2; break;
+    case 0xcf: printf("RST    1"); break;
+    case 0xd0: printf("RNC"); break;
+    case 0xd1: printf("POP    D"); break;
+    case 0xd2: printf("JNC    adr"); opbytes = 3; break;
+    case 0xd3: printf("OUT    #$%02x", code[1]); opbytes = 2; break;
+    case 0xd4: printf("CNC    adr"); opbytes = 3; break;
+    case 0xd5: printf("PUSH   D"); break;
+    case 0xd6: printf("SUI    #$%02x", code[1]); opbytes = 2; break;
+    case 0xd7: printf("RST    2"); break;
+    case 0xd8: printf("RC"); break;
+    case 0xd9: printf("NOP"); break;
+    case 0xda: printf("JC     adr"); opybtes = 3; break;
+    case 0xdb: printf("IN     #$%02x", code[1]); opbytes = 2; break;
+    case 0xdc: printf("CC     adr"); opbytes = 3; break;
+    case 0xdd: printf("NOP"); break;
+    case 0xde: printf("SBI    #$%02x", code[1]); opbytes = 2; break;
+    case 0xdf: printf("RST    3"); break;
+    case 0xe0: printf("RPO"); break;
+    case 0xe1: printf("POP    H"); break;
+    case 0xe2: printf("JPO    adr"); opbytes = 3; break;
+    case 0xe3: printf("XTHL"); break;
+    case 0xe4: printf("CPO    adr"); opbytes = 3; break;
+    case 0xe5: printf("PUSH   H"); break;
+    case 0xe6: printf("ANI    #$%02x", code[1]); opbytes = 2; break;
+    case 0xe7: printf("RST    4"); break;
+    case 0xe8: printf("RPE"); break;
+    case 0xe9: printf("PCHL"); break;
+    case 0xea: printf("JPE    adr"); opbytes = 3; break;
+    case 0xeb: printf("XCHG"); break;
+    case 0xec: printf("CPE    adr"); opbytes = 3; break;
+    case 0xed:
 
 
   }
