@@ -1,3 +1,5 @@
+#include<stdio.h>
+
 /**
   Algorithm for disassembling 8080 code:
     1. Read the code into a buffer
@@ -251,10 +253,57 @@ int Disassemble8080Op(unsigned char *codebuffer, int pc){
     case 0xea: printf("JPE    adr"); opbytes = 3; break;
     case 0xeb: printf("XCHG"); break;
     case 0xec: printf("CPE    adr"); opbytes = 3; break;
-    case 0xed:
-
-
+    case 0xed: printf("NOP"); break;
+    case 0xee: printf("XRI,   #$%02x", code[1]); opbytes = 2; break;
+    case 0xef: printf("RST    5"); break;
+    case 0xf0: printf("RP"); break;
+    case 0xf1: printf("POP    PSW"); break;
+    case 0xf2: printf("JP     adr"); opbytes = 3; break;
+    case 0xf3: printf("DI"); break;
+    case 0xf4: printf("CP     adr"); opbytes = 3; break;
+    case 0xf5: printf("PUSH   PSW"); break;
+    case 0xf6: printf("ORI    #$%02x", code[1]); opbytes = 2; break;
+    case 0xf7: printf("RST    6"); break;
+    case 0xf8: printf("RM"); break;
+    case 0xf9: printf("SPHL"); break;
+    case 0xfa: printf("JM     adr"); opbytes = 3; break;
+    case 0xfb: printf("EI"); break;
+    case 0xfc: printf("CM     adr"); opybytes = 3; break;
+    case 0xfd: printf("NOP"); break;
+    case 0xfe: printf("CPI    #$%02x", code[1]); opbytes = 2; break;
+    case 0xff: printf("RST    7"); break;
   }
   printf("\n");
   return opbytes;
+}
+
+/**
+  need a routine that does the following:
+  1. Opens up a file full of compiled 8080 code
+  2. Reads it into a memory buffer
+  3. Skips through the memory buffer calling Disassemble8080Op
+  4. Advance the PC by the amount returned by Disassemble8080Op
+  5. Quit at the end of the buffer
+**/
+
+// this main method is taken from the emulator101 tutorial
+int main(int argc, char **argv){
+  FILE *f = fopen(argv[1], "rb");
+
+  if (f == NULL){
+    printf("error: Couldn't open %s\n", argv[1]);
+    exit(1);
+  }
+
+  // Get the file size and read it into a memory codebuffer
+  fseek(f, 0L, SEEK_END);
+  int fsize = ftell(f);
+  fseek(f, 0L, SEEK_SET);
+
+  unsigned char *buffer = malloc(fsize);
+
+  // IMPORTANT QUESTION: why is it char when we're reading in hexadecimal numbers?
+
+
+
 }
