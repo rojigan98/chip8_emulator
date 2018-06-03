@@ -302,8 +302,17 @@ int main(int argc, char **argv){
 
   unsigned char *buffer = malloc(fsize);
 
-  // IMPORTANT QUESTION: why is it char when we're reading in hexadecimal numbers?
+  // IMPORTANT: chars are used to store hexadecimals, no type just for hexadecimals
 
+  fread(buffer, fsize, 1, f);
+  fclose(f);
 
+  int pc = 0;
+
+  while(pc < fsize)
+  {
+    pc += Disassemble8080Op(buffer, pc);
+  }
+  return 0;
 
 }
