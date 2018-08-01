@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include "8080_emulator.h"
 /**
   Algorithm for disassembling 8080 code:
     1. Read the code into a buffer
